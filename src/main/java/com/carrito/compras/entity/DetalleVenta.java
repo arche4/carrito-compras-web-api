@@ -1,5 +1,6 @@
 package com.carrito.compras.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,12 +18,15 @@ public class DetalleVenta {
     @Column(name = "idDetalleVenta")
     private Long idDetalleVenta;
 
+    @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "venta", referencedColumnName="idVenta")
+    @JoinColumn(name = "idventa")
     private Venta venta;
 
+
+    @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "producto", referencedColumnName="idProducto")
+    @JoinColumn(name = "idproducto")
     private Producto producto;
 
 }

@@ -49,13 +49,14 @@ public class VentaController {
 
     @PostMapping(value = "/crearVenta/{idProducto}")
     public ResponseEntity<Response> crearVenta(@PathVariable("idProducto") Long id, @Valid @RequestBody VentaRequestDTO ventaRequestDTO) {
-        Cliente cliente = clienteService.getClienteid(ventaRequestDTO.getIdCliente());
+        Cliente cliente = clienteService.getClienteid(ventaRequestDTO.getIdcliente());
         Producto producto = productoService.getProductid(id);
         if (cliente == null && producto== null) {
             return ResponseEntity.notFound().build();
         } else {
             this.modelMapper = new ModelMapper();
             Venta venta = this.modelMapper.map(ventaRequestDTO, Venta.class);
+            venta.setCliente(cliente);
             Response response = ventaService.crearVenta(producto, venta);
             return new ResponseEntity<>(response, Utils.getHttpStatusResponse(response));
         }

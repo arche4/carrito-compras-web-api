@@ -1,6 +1,6 @@
 package com.carrito.compras.entity;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +12,6 @@ import java.util.List;
 @Entity
 @Table(name = "cliente")
 @NoArgsConstructor
-@AllArgsConstructor
 public class Cliente {
 
     private static final long serialVersionUID = 1L;
@@ -35,6 +34,7 @@ public class Cliente {
     @Column(name = "email")
     private String email;
 
+    @JsonManagedReference
     @OneToMany(
             mappedBy = "cliente",
             cascade = CascadeType.ALL

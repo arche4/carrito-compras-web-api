@@ -1,6 +1,7 @@
 package com.carrito.compras.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,6 +29,7 @@ public class Producto {
     @Column(name = "precio")
     private String precio;
 
+    @JsonManagedReference
     @OneToMany(
             mappedBy = "producto",
             cascade = CascadeType.ALL

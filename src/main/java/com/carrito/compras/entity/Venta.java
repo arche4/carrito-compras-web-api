@@ -1,5 +1,6 @@
 package com.carrito.compras.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,14 +24,19 @@ public class Venta {
     @Column(name = "idVenta")
     private Long idVenta;
 
+    @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cliente", referencedColumnName="idCliente")
+    @JoinColumn(name = "idcliente")
     private Cliente cliente;
 
     @Column(name = "fecha")
     private Date fecha;
 
-    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @OneToMany(
+            mappedBy = "venta",
+            cascade = CascadeType.ALL
+    )
     private List<DetalleVenta> detalleVenta = new ArrayList<>();
 
 }

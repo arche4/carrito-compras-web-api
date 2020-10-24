@@ -10,7 +10,7 @@ import java.util.Date;
 public class VentaRequestDTO {
 
     @NotNull(message = "El id del cliente es requierdo")
-    private Long idCliente;
+    private Long idcliente;
 
     @NotNull(message = "La fecha es requerida")
     private Date fecha;

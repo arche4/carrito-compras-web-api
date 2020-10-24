@@ -1,14 +1,31 @@
-# SOLUCION #
+# Proyecto carrito de compras #
 
-## Back-end ##
+Se debe ejecutar, normal sin docker, al compilar el proyecto se debe crear el scrit en la bd Mysql, para insertar un nuevo usuario.
+INSERT INTO `carritocompras`.`usuario` (`id`, `usuario`) VALUES ('1', 'admin');
 
-Para el backend se implemento una libreria llamada SwaggerConfig, que nos permite generar toda la documentación completa de los endPoint del back.
+![alt text](tablasBD.PNG "Prueba Exitosa")
 
-![alt text]( ./api-documentacion-back "EndPoints")
+Se debe generar el enpoint para conocer el token de la siguiente manera.
+![alt text](autenticación.PNG "Prueba Exitosa Cliente")
 
-En el que se puede evidenciar la estructura completa del json que se debe enviar.
+Luego llama al siguiente Enpoint enviando en el nuevo token generado, al igual que los demas enpoint.
+![alt text](tokenServicio.PNG "Prueba Exitosa Cliente")
 
-![alt text]( ./api-documentacion-json "Estructura json")
+![alt text](ventaRest.PNG "Prueba Exitosa Cliente")
 
-En esta ruta del local se debe evidenciar la documentación 
-http://localhost:9082/api/v1/swagger-ui.html#
+# Ejecucion de pruebas unitarias #
+![alt text](EjecucionPruebasUnitarias.PNG "Prueba Exitosa")
+
+Prueba Crear cliente exitosa
+
+![alt text](exitosaPruebaCliente.PNG "Prueba Exitosa Cliente")
+![alt text](pruebaUnitariaClienteExitosa.PNG "Prueba Exitosa Cliente")
+
+Caso de prueba error de producto
+
+![alt text](pruebasUnitariasERRORproducto.PNG "Prueba Exitosa producto")
+
+Caso de prueba error para venta
+
+![alt text](PruebaUnitariaErrorVenta.PNG "Prueba Exitosa venta")
+

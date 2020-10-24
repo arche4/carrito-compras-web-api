@@ -7,4 +7,5 @@ import org.springframework.stereotype.Service;
 public interface ClienteService {
 
     public Cliente crearCliente (Cliente cliente);
+    public Cliente getClienteid(Long id);
 }

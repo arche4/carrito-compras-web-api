@@ -13,11 +13,14 @@ Luego llama al siguiente Enpoint enviando en el nuevo token generado, al igual q
 ![alt text](EjecucionPruebasUnitarias.PNG "Prueba Exitosa")
 
 Prueba Crear cliente exitosa
+
 ![alt text](exitosaPruebaCliente.PNG "Prueba Exitosa Cliente")
 ![alt text](pruebaUnitariaClienteExitosa.PNG "Prueba Exitosa Cliente")
 
 Caso de prueba error de producto
+
 ![alt text](pruebasUnitariasERRORproducto.PNG "Prueba Exitosa producto")
 
 Caso de prueba error para venta
+
 ![alt text](PruebaUnitariaErrorVenta.PNG "Prueba Exitosa venta")

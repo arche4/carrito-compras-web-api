@@ -13,16 +13,13 @@ public class ProductoServiceImpl implements ProductoService {
 
     private final ProductoRepository productoRepository;
 
-    public  ProductoServiceImpl(
-            ProductoRepository productoRepository
-    ) {
+    public  ProductoServiceImpl(ProductoRepository productoRepository) {
         this.productoRepository = productoRepository;
     }
 
     @Override
     public Producto getProduct(Long id) {
-
-        return productoRepository.findById(id).orElseThrow(() -> new NoDataFoundException("product doesn't exist"));
+return productoRepository.findById(id).orElseThrow(() -> new NoDataFoundException("product doesn't exist"));
     }
 
     @Override

@@ -17,12 +17,12 @@ import java.util.Optional;
 
 public class ProductoServiceImplTest {
 
-    //Otra forma de mockear
+
     private ProductoRepository productRepository = Mockito.mock(ProductoRepository.class);
 
     private ProductoService productoService;
 
-    //Corre este test
+
     @Test(expected=NoDataFoundException.class)
     public void getProductThatNoExist() {
         productoService = new ProductoServiceImpl(productRepository);
@@ -32,11 +32,16 @@ public class ProductoServiceImplTest {
 
     @Test
     public void getProductSuccess() {
+        //Arrange
         Producto productoEsperado = new Producto();
         productoEsperado.setIdProducto(1L);
         productoService = new ProductoServiceImpl(productRepository);
+
+        //Actions
         given(productRepository.findById(anyLong())).willReturn(Optional.of(productoEsperado));
         Producto productoResultado = productoService.getProduct(1L);
+
+        //Assert
         assertEquals(productoEsperado, productoResultado);
         //TODO hacer assert del producto que retorna
     }

@@ -1,5 +1,6 @@
 package com.carrito.compras.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "cliente")
 @NoArgsConstructor
+@AllArgsConstructor
 public class Cliente {
 
     private static final long serialVersionUID = 1L;

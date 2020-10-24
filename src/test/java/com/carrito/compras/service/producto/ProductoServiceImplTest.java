@@ -3,6 +3,7 @@ package com.carrito.compras.service.producto;
 import com.carrito.compras.entity.Producto;
 import com.carrito.compras.repository.ProductoRepository;
 import com.carrito.compras.service.producto.impl.ProductoServiceImpl;
+import com.carrito.compras.util.Response;
 import org.mockito.Mockito;
 import org.junit.Test;
 import com.carrito.compras.exceptions.NoDataFoundException;
@@ -23,26 +24,32 @@ public class ProductoServiceImplTest {
     private ProductoService productoService;
 
 
-    @Test(expected=NoDataFoundException.class)
+    @Test()
     public void getProductThatNoExist() {
+        //Arrange
+        Response productoEsperado = new Response(500, "Internal Server Error: No value present");
         productoService = new ProductoServiceImpl(productRepository);
+
+        //Actions
         given(productRepository.findById(anyLong())).willReturn(Optional.empty());
-        productoService.getProduct(1L);
+        Response productoResultado = productoService.getProduct(1L);
+
+        //Assert
+        assertEquals(productoEsperado,productoResultado);
     }
 
     @Test
     public void getProductSuccess() {
         //Arrange
-        Producto productoEsperado = new Producto();
-        productoEsperado.setIdProducto(1L);
+        Response productoEsperado = new Response(200, "Lista de productos", new Producto(1L, null,null,null));
         productoService = new ProductoServiceImpl(productRepository);
 
         //Actions
-        given(productRepository.findById(anyLong())).willReturn(Optional.of(productoEsperado));
-        Producto productoResultado = productoService.getProduct(1L);
+        given(productRepository.findById(anyLong())).willReturn(Optional.of(new Producto(1L, null,null,null)));
+        Response productoResultado = productoService.getProduct(1L);
 
         //Assert
-        assertEquals(productoEsperado, productoResultado);
+        assertEquals(productoEsperado,productoResultado);
         //TODO hacer assert del producto que retorna
     }
 

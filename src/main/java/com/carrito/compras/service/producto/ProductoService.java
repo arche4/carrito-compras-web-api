@@ -1,16 +1,18 @@
 package com.carrito.compras.service.producto;
 
 import com.carrito.compras.entity.Producto;
+import com.carrito.compras.util.Response;
 
 import java.util.List;
 
 public interface ProductoService {
 
-    public Producto getProduct(Long id);
-    public Producto crearProducto (Producto producto);
-    public Producto actualizarProducto (Producto producto);
-    public Producto eliminarProducto(Long id);
-    public List<Producto> findByNombre(String nombre);
-    public List<Producto> listAllListProducto();
+    Response getProduct(Long id);
+    Producto getProductid(Long id);
+    Response crearProducto (Producto producto);
+    Response actualizarProducto (Long id, Producto producto);
+    Response eliminarProducto(Long id);
+    Response findByNombre(String nombre);
+    Response listAllListProducto();
 
 }

@@ -9,11 +9,23 @@ import org.springframework.stereotype.Service;
 @Service
 public class ClienteServiceImpl implements ClienteService {
 
-    @Autowired
+
     private ClienteRepository clienteRepository;
+    
+    @Autowired
+    public ClienteServiceImpl(ClienteRepository clienteRepository) {
+        this.clienteRepository = clienteRepository;
+    }
 
     @Override
     public Cliente crearCliente(Cliente cliente) {
         return clienteRepository.save(cliente);
     }
+
+    @Override
+    public Cliente getClienteid(Long id) {
+        return clienteRepository.findById(id).orElse(new Cliente());
+    }
+
+
 }

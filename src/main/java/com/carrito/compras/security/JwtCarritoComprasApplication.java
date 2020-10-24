@@ -2,9 +2,12 @@ package com.carrito.compras.security;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -28,6 +31,17 @@ public class JwtCarritoComprasApplication {
                     .antMatchers(String.valueOf(HttpMethod.POST), "/usuario").permitAll()
                     .anyRequest().authenticated();
         }
+
+        @Override
+        public void configure(WebSecurity web) throws Exception {
+            // Allow swagger to be accessed without authentication
+            web.ignoring()
+                    .antMatchers("/swagger-ui.html")//
+                    .and()
+                    .ignoring();
+        }
+
     }
+
 
 }

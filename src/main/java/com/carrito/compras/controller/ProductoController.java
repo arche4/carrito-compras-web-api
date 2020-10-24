@@ -5,14 +5,14 @@ import com.carrito.compras.dto.request.ProductoActualizarRequestDTO;
 import com.carrito.compras.dto.request.ProductoRequestDTO;
 import com.carrito.compras.entity.Producto;
 import com.carrito.compras.service.producto.ProductoService;
+import com.carrito.compras.util.Response;
+import com.carrito.compras.util.Utils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/producto")
@@ -25,49 +25,38 @@ public class ProductoController {
 
 
     @GetMapping(value = "/{name}")
-    public ResponseEntity<List<Producto>> getproducto(@PathVariable("name") String name){
-        List<Producto> productoNombre = productoService.findByNombre(name);
-        if(productoNombre.isEmpty()){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(productoNombre);
+    public ResponseEntity<Response> getproducto(@PathVariable("name") String name){
+        Response response  = productoService.findByNombre(name);
+        return new ResponseEntity<>(response, Utils.getHttpStatusResponse(response));
     }
 
     @GetMapping
-    public List<Producto> getAllListProducto(){
-        return productoService.listAllListProducto();
+    public ResponseEntity<Response> getAllListProducto(){
+        Response response =  productoService.listAllListProducto();
+        return new ResponseEntity<>(response, Utils.getHttpStatusResponse(response));
     }
 
     @PostMapping("")
-    public ResponseEntity<?> crearProducto(@Valid @RequestBody ProductoRequestDTO productoRequestDTO) {
+    public ResponseEntity<Response> crearProducto(@Valid @RequestBody ProductoRequestDTO productoRequestDTO) {
         this.modelMapper = new ModelMapper();
         Producto producto = this.modelMapper.map(productoRequestDTO, Producto.class);
-        Producto productoCrear = productoService.crearProducto(producto);
-        if (productoCrear==null){
-            return ResponseEntity.notFound().build();
-        }else {
-            return ResponseEntity.status(HttpStatus.CREATED).body(productoCrear);
-        }
+        Response response = productoService.crearProducto(producto);
+        return new ResponseEntity<>(response, Utils.getHttpStatusResponse(response));
     }
 
-    @PutMapping()
-    public ResponseEntity<Producto> actualizarProducto(@Valid @RequestBody ProductoActualizarRequestDTO productoActualizarRequestDTO){
+    @PutMapping("/{id}")
+    public ResponseEntity<Response> actualizarProducto(@PathVariable Long id, @Valid @RequestBody ProductoActualizarRequestDTO productoActualizarRequestDTO){
         this.modelMapper = new ModelMapper();
         Producto data = this.modelMapper.map(productoActualizarRequestDTO, Producto.class);
-        Producto actualizarProducto = productoService.actualizarProducto(data);
-        if(actualizarProducto==null){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(actualizarProducto);
+        Response response =  productoService.actualizarProducto(id, data);
+        return new ResponseEntity<>(response, Utils.getHttpStatusResponse(response));
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Producto> eliminarProducto(@PathVariable("id") Long id){
-        Producto productoEliminar = productoService.eliminarProducto(id);
-        if (productoEliminar==null){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(productoEliminar);
+    public ResponseEntity<Response> eliminarProducto(@PathVariable("id") Long id){
+        Response response = productoService.eliminarProducto(id);
+        return new ResponseEntity<>(response, Utils.getHttpStatusResponse(response));
+
     }
 
 

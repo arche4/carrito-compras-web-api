@@ -1,15 +1,16 @@
 package com.carrito.compras.entity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
+@Data
 @Entity
 @Table(name = "cliente")
 @NoArgsConstructor
-@AllArgsConstructor
 public class Cliente {
 
     private static final long serialVersionUID = 1L;
@@ -32,55 +33,11 @@ public class Cliente {
     @Column(name = "email")
     private String email;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
+    @OneToMany(
+            mappedBy = "cliente",
+            cascade = CascadeType.ALL
+    )
+    private List<Venta> venta = new ArrayList<>();
 
-    public Long getIdCliente() {
-        return idCliente;
-    }
 
-    public void setIdCliente(Long idCliente) {
-        this.idCliente = idCliente;
-    }
-
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }

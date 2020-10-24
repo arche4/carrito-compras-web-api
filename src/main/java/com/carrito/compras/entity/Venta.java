@@ -1,12 +1,15 @@
 package com.carrito.compras.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+@Data
 @Entity
 @Table(name = "Venta")
 @NoArgsConstructor
@@ -20,40 +23,14 @@ public class Venta {
     @Column(name = "idVenta")
     private Long idVenta;
 
-    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idCliente")
+    @JoinColumn(name = "cliente", referencedColumnName="idCliente")
     private Cliente cliente;
 
     @Column(name = "fecha")
     private Date fecha;
 
+    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
+    private List<DetalleVenta> detalleVenta = new ArrayList<>();
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public Long getIdVenta() {
-        return idVenta;
-    }
-
-    public void setIdVenta(Long idVenta) {
-        this.idVenta = idVenta;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
 }

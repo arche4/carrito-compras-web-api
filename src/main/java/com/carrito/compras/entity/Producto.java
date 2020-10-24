@@ -1,10 +1,15 @@
 package com.carrito.compras.entity;
 
+
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
+@Data
 @Entity
 @Table(name = "producto")
 @NoArgsConstructor
@@ -23,31 +28,12 @@ public class Producto {
     @Column(name = "precio")
     private String precio;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
+    @OneToMany(
+            mappedBy = "producto",
+            cascade = CascadeType.ALL
+    )
+    private List<DetalleVenta> detalleVenta = new ArrayList<>();
 
-    public Long getIdProducto() {
-        return idProducto;
-    }
 
-    public void setIdProducto(Long idProducto) {
-        this.idProducto = idProducto;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(String precio) {
-        this.precio = precio;
-    }
 }
+
